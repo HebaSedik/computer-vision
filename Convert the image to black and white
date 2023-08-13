@@ -1,0 +1,3 @@
+import cv2
+img = cv2.imread("C:/Users/hebas/OneDrive/Desktop/Snapchat-1752898214.jpg",0)
+cv2.imshow("heba",img)
