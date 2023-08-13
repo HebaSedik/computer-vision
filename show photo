@@ -1,0 +1,4 @@
+import cv2
+img = cv2.imread("C:/Users/hebas/OneDrive/Desktop/Snapchat-1752898214.jpg") # location of image
+cv2.imshow("heba",img)
+print(img.shape) # معرفه ابعاد الصوره
