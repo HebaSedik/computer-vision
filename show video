@@ -1,0 +1,10 @@
+import cv2
+#cap = cv2.VideoCapture("C:/Users/hebas/OneDrive/Desktop/1.4.3  بناء الشبكات العصبية العميقة(360P).mp4")
+cap = cv2.VideoCapture(0) #open camera
+while True:
+    st , frame =cap.read()
+    cv2.imshow("vid" , frame)
+    if cv2.waitKey(10) & 0xff==ord("x"): # When you press x, the camera turns off
+        break
+cap.release() # to close camera
+cv2.destroyAllWindows() 
