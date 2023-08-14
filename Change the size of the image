@@ -1,0 +1,4 @@
+import cv2
+img = cv2.imread("C:/Users/hebas/OneDrive/Desktop/Snapchat-1752898214.jpg")
+new_img = cv2.resize(img ,(400,500))
+cv2.imshow("heba",new_img)
