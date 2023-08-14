@@ -1,0 +1,10 @@
+import cv2
+cap = cv2.VideoCapture(0)
+while True:
+    st , frame =cap.read()
+    new_frame = cv2.resize(frame , (600,600))
+    cv2.imshow("vid" , new_frame)
+    if cv2.waitKey(10) & 0xff==ord("x"): 
+        break
+cap.release()
+cv2.destroyAllWindows() 
