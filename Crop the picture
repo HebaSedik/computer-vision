@@ -1,0 +1,4 @@
+import cv2
+img = cv2.imread("C:/Users/EL-Huda/Desktop/Snapchat-1752898214.jpg")
+croped_img = img[200:350 , 200:450]
+cv2.imshow("heba",croped_img)
