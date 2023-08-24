@@ -1,0 +1,48 @@
+import cv2
+import numpy as np
+image = cv2.imread("Snapchat-1752898214.jpg")
+print(image.shape)
+cv2.imshow("new", image)
+# translation #
+def translate(image, x, y, show=False):
+    m = np.float32([[1, 0, 50], [0, 1, 70]])
+    shifted = cv2.warpAffine(image, m, (image.shape[1], image.shape[0]))
+    if show:
+        cv2.imshow('[{},{}] shifted image'.format(50, 100), shifted)
+        cv2.waitKey(0)
+    return shifted
+center = map(lambda x: x // 2, image.shape[1::-1])
+m = cv2.getRotationMatrix2D(tuple(center), 45, float(1))
+rotated = cv2.warpAffine(image, m, (image.shape[1], image.shape[0]))
+cv2.imshow('{} degree'.format(45), rotated)
+cv2.waitKey(0)
+# rotate
+def rotate(image, angle, scale, show=False):
+    center = map(lambda x: x // 2, image.shape[1::-1])
+    m = cv2.getRotationMatrix2D(tuple(center), angle, float(scale))
+    rotated = cv2.warpAffine(image, m, (image.shape[1], image.shape[0]))
+    if show:
+        cv2.imshow('{} rotated image'.format(angle), rotated)
+        cv2.waitKey(0)
+    return rotated
+new_width = 700
+r = new_width / image.shape[1]
+height = int(r*image.shape[0])
+resized = cv2.resize(image, (new_width, height), interpolation=cv2.INTER_AREA)
+cv2.imshow('resize by {0:.2f}'.format(r), resized)
+cv2.waitKey(0)
+#cv2.destroyAllWindow()
+def resize(image, width=None, height=None, show=False):
+    if width is None and height is None:
+        return image
+    if width is None:
+        r = height / image.shape[0]
+        width =int(r*image.shape[1])
+    elif height is None:
+        r = new_width / image.shape[1]
+        height = int(r * image.shape[0])
+    resized = cv2.resize(image, (new_width, height), interpolation=cv2.INTER_AREA)
+    if show:
+        cv2.imshow('{0:.2f} resized image'.format(r), resized)
+        cv2.waitKey(0)
+    return resized
