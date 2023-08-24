@@ -1,0 +1,27 @@
+import cv2
+WINDOW_NAME = "image"
+CROP_WINDOW_NAME = "cropped"
+cv2.namedWindow(WINDOW_NAME)
+image = cv2.imread("Snapchat-1752898214.jpg")
+POINTS = []
+clone = image.copy()
+def mouse_callback(event, x, y, flags, param):
+    global clone
+    if event == cv2.EVENT_LBUTTONDOWN:
+        cv2.destroyWindow(CROP_WINDOW_NAME)
+        clone = image.copy()
+        POINTS.append((x, y))
+    if event == cv2.EVENT_LBUTTONUP:
+        POINTS.append((x, y))
+colors = {'red': (0, 0, 255), 'green': (0, 255, 0)}
+cv2.setMouseCallback(WINDOW_NAME, mouse_callback, param=colors)
+while True:
+    cv2.imshow(WINDOW_NAME, clone)
+    if len(POINTS) == 2:
+        cv2.rectangle(clone, *POINTS, (0, 0, 255), 3)
+        xs, ys = zip(*POINTS)
+        cv2.imshow(CROP_WINDOW_NAME, clone[min(ys):max(ys), min(xs):max(xs)])
+        POINTS = []
+    if cv2.waitKey(1) & 0xff == ord('x'):
+        break
+cv2.waitKey(0)
